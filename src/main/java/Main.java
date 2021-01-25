@@ -1,3 +1,4 @@
+import model.Autos;
 import model.Persons;
 import services.UserService;
 
@@ -21,7 +22,12 @@ public class Main {
 //        }
 
         UserService userService = new UserService();
-        Persons person = userService.getPersonByIdFromDao(1);
-        System.out.println(person.getName() + "  " + person.getAge());
+
+//        Persons person = userService.getPersonByIdFromDao(1);
+//        System.out.println(person.getName() + "  " + person.getAge());
+
+        Autos auto = userService.getAutosByIdFromDao(1);
+        System.out.println(auto.getModel() + "  " + auto.getColor());
+
     }
 }

@@ -12,6 +12,7 @@ public class Persons {
     private int age;
     private String email;
 
+
     @Id
     @Basic
     @Column(name = "person_id", nullable = false)

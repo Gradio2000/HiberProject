@@ -1,41 +1,22 @@
 import model.Autos;
 import model.Persons;
-import services.UserService;
+import services.AutoService;
+import services.PersonsService;
 
-import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 public class Main {
     public static void main(final String[] args) {
-
-//        final Session session = getSession();
-//        try {
-//            System.out.println("querying all the managed entities...");
-//            final Metamodel metamodel = session.getSessionFactory().getMetamodel();
-//            for (EntityType<?> entityType : metamodel.getEntities()) {
-//                final String entityName = entityType.getName();
-//                final Query query = session.createQuery("from " + entityName);
-//                System.out.println("executing: " + query.getQueryString());
-//                for (Object o : query.list()) {
-//                    System.out.println("  " + o);
-//                }
-//            }
-//        } finally {
-//            session.close();
-//        }
-
-        UserService userService = new UserService();
-
-        Persons person = userService.getPersonByIdFromDao(1);
-        System.out.println(person.getName() + "  " + person.getAge());
-
-        Autos auto = userService.getAutosByIdFromDao(1);
-        System.out.println(auto.getModel() + "  " + auto.getColor());
-
-        Set<Autos> autosSet = new HashSet<Autos>();
-
-        Persons person4 = new Persons(4, "asas", 22, "qq@qq.qq", "qwert");
-        userService.addPerson(person4);
+        AutoService autoService = new AutoService();
+        Map<String, List<String>> map = autoService.getCarByPerson();
+        for (String key : map.keySet()){
+            System.out.println(key);
+            for (String car : map.get(key)){
+                System.out.println(car);
+            }
+        }
 
     }
 }

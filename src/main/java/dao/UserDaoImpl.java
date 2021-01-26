@@ -4,8 +4,11 @@ import model.Autos;
 import model.Persons;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.query.Query;
 import util.ConnectFactory;
 
+import java.sql.Connection;
+import java.util.List;
 import java.util.Set;
 
 public class UserDaoImpl implements Dao {
@@ -16,8 +19,15 @@ public class UserDaoImpl implements Dao {
         return ConnectFactory.getSession().get(Autos.class, id);
     }
 
-    public Set<Autos> getSetAutoByID() {
-        return null;
+    public List<Autos> getListAuto() {
+        Session session = ConnectFactory.getSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("from Autos");
+        List<Autos> autosList = query.list();
+        tx.commit();
+        session.close();
+
+        return autosList;
     }
 
     public void safePerson(Persons person) {

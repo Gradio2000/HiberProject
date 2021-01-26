@@ -4,14 +4,10 @@ import dao.UserDaoImpl;
 import model.Autos;
 import model.Persons;
 
-public class UserService {
+public class PersonsService {
     UserDaoImpl dao = new UserDaoImpl();
     public Persons getPersonByIdFromDao(int id){
         return dao.getPersonById(id);
-    }
-
-    public Autos getAutosByIdFromDao(int id){
-        return dao.getAutoByID(id);
     }
 
     public void addPerson(Persons person){

@@ -33,21 +33,31 @@ public class UserDaoImpl implements Dao {
     }
 
     @Override
-    public void update(Persons persons) {
-        Session session = ConnectFactory.getSession();
-        Persons newPersons = session.get(Persons.class, persons.getPersonId());
-        String name = persons.getName();
-        int age = persons.getAge();
-        String email = persons.getEmail();
-        String adress = persons.getAdress();
+    public Boolean update(Persons persons) {
+        Session session = null;
+        try{
+            session = ConnectFactory.getSession();
+            Persons newPersons = session.get(Persons.class, persons.getPersonId());
+            String name = persons.getName();
+            int age = persons.getAge();
+            String email = persons.getEmail();
+            String adress = persons.getAdress();
 
-        newPersons.setName(name);
-        newPersons.setAge(age);
-        newPersons.setAdress(adress);
-        newPersons.setEmail(email);
+            newPersons.setName(name);
+            newPersons.setAge(age);
+            newPersons.setAdress(adress);
+            newPersons.setEmail(email);
 
-        Transaction tx = session.beginTransaction();
-        tx.commit();
-        session.close();
+            Transaction tx = session.beginTransaction();
+            tx.commit();
+        }
+        catch (Exception e){
+            System.out.println("Ошибка обновления клиента");
+            return false;
+        }
+        finally {
+            session.close();
+        }
+        return true;
     }
 }

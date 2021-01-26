@@ -13,4 +13,8 @@ public class UserService {
     public Autos getAutosByIdFromDao(int id){
         return dao.getAutoByID(id);
     }
+
+    public void addPerson(Persons person){
+        dao.safePerson(person);
+    }
 }

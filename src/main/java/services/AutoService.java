@@ -2,6 +2,7 @@ package services;
 
 import dao.UserDaoImpl;
 import model.Autos;
+import model.Persons;
 
 import javax.persistence.ManyToOne;
 import java.util.ArrayList;
@@ -39,6 +40,10 @@ public class AutoService {
             }
         }
         return map;
+    }
+
+    public void updatePerson(Persons persons){
+        dao.update(persons);
     }
 
 }

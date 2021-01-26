@@ -6,10 +6,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 import org.hibernate.query.Query;
 import util.ConnectFactory;
-
-import java.sql.Connection;
 import java.util.List;
-import java.util.Set;
 
 public class UserDaoImpl implements Dao {
     public Persons getPersonById(int id){
@@ -21,12 +18,9 @@ public class UserDaoImpl implements Dao {
 
     public List<Autos> getListAuto() {
         Session session = ConnectFactory.getSession();
-        Transaction tx = session.beginTransaction();
-        Query query = session.createQuery("from Autos");
+        Query query = session.createQuery("FROM Autos");
         List<Autos> autosList = query.list();
-        tx.commit();
         session.close();
-
         return autosList;
     }
 
@@ -36,5 +30,24 @@ public class UserDaoImpl implements Dao {
        session.saveOrUpdate(person);
        session.flush();
        tx.commit();
+    }
+
+    @Override
+    public void update(Persons persons) {
+        Session session = ConnectFactory.getSession();
+        Persons newPersons = session.get(Persons.class, persons.getPersonId());
+        String name = persons.getName();
+        int age = persons.getAge();
+        String email = persons.getEmail();
+        String adress = persons.getAdress();
+
+        newPersons.setName(name);
+        newPersons.setAge(age);
+        newPersons.setAdress(adress);
+        newPersons.setEmail(email);
+
+        Transaction tx = session.beginTransaction();
+        tx.commit();
+        session.close();
     }
 }

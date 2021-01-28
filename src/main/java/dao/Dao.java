@@ -12,4 +12,5 @@ public interface Dao {
     List<Autos> getListAuto();
     void safePerson(Persons person);
     Boolean update(Persons persons);
+    Boolean delete (int id);
 }

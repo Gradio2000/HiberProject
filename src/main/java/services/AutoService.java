@@ -46,4 +46,8 @@ public class AutoService {
         dao.update(persons);
     }
 
+    public void deletePerson(int id){
+        dao.delete(id);
+    }
+
 }

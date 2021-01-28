@@ -60,4 +60,24 @@ public class UserDaoImpl implements Dao {
         }
         return true;
     }
+
+    @Override
+    public Boolean delete(int id) {
+        Session session = null;
+        try {
+            session = ConnectFactory.getSession();
+            Transaction tx = session.beginTransaction();
+            Persons persons = session.get(Persons.class, id);
+            session.delete(persons);
+            tx.commit();
+        }
+        catch (Exception e){
+            System.out.println("Ошибка удаления клиента!");
+            return false;
+        }
+        finally {
+            session.close();
+        }
+        return true;
+    }
 }

@@ -18,7 +18,9 @@ public class Main {
             }
         }
 
-        Persons persons = new Persons(2, "Pupa", 240, "qq@qq.com", "Москва");
-        autoService.updatePerson(persons);
+//        Persons persons = new Persons(2, "Pupa", 240, "qq@qq.com", "Москва");
+//        autoService.updatePerson(persons);
+
+        autoService.deletePerson(1);
     }
 }
